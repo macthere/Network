@@ -48,13 +48,14 @@ public class LoginController {
 		startBut.getChildren().add(addStartButton());
 		startBut.setAlignment(Pos.BOTTOM_RIGHT);
 		root.add(startBut,1,3);
-		//try {
-			Image image = new Image("/Resources/Icons/Lasagna.png");
-		//} catch(RuntimeException e) {
-			System.out.println("Runtime Exception");
-		//}
+		try {
+			Image image = new Image("/Icons/Lasagna.png");
+			stage.getIcons().add(image);
+		} catch(RuntimeException e) {
+			System.out.println("Could not import icon");
+		}
 		
-		//stage.getIcons().add(image);	
+			
 		
 		stage.setScene(new Scene(root, 300, 250));
 		stage.show();
