@@ -20,12 +20,16 @@ import javafx.geometry.Pos;
 
 public class LoginController {
 	
-	Stage stage;
-	LoginView loginview;
+	private static String NAME = "mac";
+	private static String PASS = "me";
+	
+	Text status = new Text();
+	TextField user = new TextField();
+	TextField password = new TextField();
+
 	
 	
 	public void initialize(Stage stage) {
-		
 		
 		
 		GridPane root = new GridPane();
@@ -39,15 +43,20 @@ public class LoginController {
 		root.add(addText("Start Here"), 0, 0, 2, 1);
 		
 		root.add(addLabel("User: "), 0, 1);
-		root.add(new TextField(),1,1);
+		user.setMinWidth(200);
+		root.add(user,1,1);
 		
 		root.add(addLabel("Password"), 0, 2);
-		root.add(new TextField(),1,2);
+		root.add(password,1,2);
 		
 		HBox startBut = new HBox(10);
 		startBut.getChildren().add(addStartButton());
 		startBut.setAlignment(Pos.BOTTOM_RIGHT);
 		root.add(startBut,1,3);
+		
+		
+		root.add(status,1,4);
+		
 		try {
 			Image image = new Image("/Icons/Lasagna.png");
 			stage.getIcons().add(image);
@@ -55,9 +64,7 @@ public class LoginController {
 			System.out.println("Could not import icon");
 		}
 		
-			
-		
-		stage.setScene(new Scene(root, 300, 250));
+		stage.setScene(new Scene(root, 400, 300));
 		stage.show();
 	}
 	
@@ -69,7 +76,10 @@ public class LoginController {
 		btn.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				System.out.println("Printed something!");
+				if ((user.getText().trim().equals(NAME)) && (password.getText().trim().equals(PASS)))
+					status.setText("You just logged in!");
+				else
+					status.setText("Invalid username or password.");
 			}
 			
 		});
